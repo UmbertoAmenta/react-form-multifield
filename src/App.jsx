@@ -7,6 +7,7 @@ export default function App() {
     content: "",
     author: "",
     sector: "",
+    published: false,
   });
   const [list, setList] = useState([]);
 
@@ -25,6 +26,7 @@ export default function App() {
       content: "",
       author: "",
       sector: "",
+      published: false,
     });
   };
 
@@ -51,7 +53,13 @@ export default function App() {
           {list.map((post, id) => {
             return (
               <li key={id}>
-                {post.title} - {post.author} - {post.sector}
+                <span>
+                  {post.title} - {post.author} - {post.sector}
+                </span>
+                <div>
+                  {post.published ? post.content : "Contenuto non publicato"}
+                </div>
+
                 <button onClick={() => deletePost(id)}>🗑️</button>
               </li>
             );
@@ -108,6 +116,16 @@ export default function App() {
           <option value="backEnd">BackEnd</option>
           <option value="design">UI/UX</option>
         </select>
+
+        <label htmlFor="postVisibility">Da pubblicare</label>
+        <input
+          id="postVisibility"
+          type="checkbox"
+          value={formData.published}
+          onChange={(event) => {
+            handlerFormData("published", event.target.checked);
+          }}
+        />
 
         <button type="submit">
           <strong>+</strong> Nuovo post
