@@ -12,7 +12,13 @@
 }
 
 .container > div {
-  float: right;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+ul,
+form {
+  width: calc(100% / 2);
 }
 
 ul {

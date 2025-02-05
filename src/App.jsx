@@ -57,7 +57,7 @@ export default function App() {
                   {post.title} - {post.author} - {post.sector}
                 </span>
                 <div>
-                  {post.published ? post.content : "Contenuto non publicato"}
+                  {post.published ? post.content : "Contenuto non pubblicato"}
                 </div>
 
                 <button onClick={() => deletePost(id)}>🗑️</button>
@@ -65,72 +65,80 @@ export default function App() {
             );
           })}
         </ul>
+        <form onSubmit={handleSubmit}>
+          <button type="button" onClick={deleteList}>
+            Svuota lista
+          </button>
+
+          <label htmlFor="postTitle">Titolo</label>
+          <input
+            id="postTitle"
+            type="text"
+            placeholder="..."
+            value={formData.title}
+            required
+            onChange={(event) => {
+              handlerFormData("title", event.target.value);
+            }}
+          />
+
+          <label htmlFor="postContent">Contenuto</label>
+          <input
+            id="postContent"
+            type="text"
+            placeholder="..."
+            value={formData.content}
+            required
+            onChange={(event) => {
+              handlerFormData("content", event.target.value);
+            }}
+          />
+
+          <label htmlFor="postAuthor">Autore</label>
+          <input
+            id="postAuthor"
+            type="text"
+            placeholder="..."
+            value={formData.author}
+            required
+            onChange={(event) => {
+              handlerFormData("author", event.target.value);
+            }}
+          />
+
+          <label htmlFor="postSector">Settore</label>
+          <select
+            name="postSector"
+            id="postSector"
+            required
+            value={formData.sector}
+            onChange={(event) => {
+              handlerFormData("sector", event.target.value);
+            }}
+          >
+            <option value="" hidden>
+              Seleziona un opzione
+            </option>
+            <option value="frontEnd">FrontEnd</option>
+            <option value="backEnd">BackEnd</option>
+            <option value="design">UI/UX</option>
+          </select>
+
+          <label htmlFor="postVisibility">Da pubblicare</label>
+          <input
+            id="postVisibility"
+            type="checkbox"
+            checked={formData.published}
+            onChange={(event) => {
+              handlerFormData("published", event.target.checked);
+            }}
+          />
+
+          <button type="submit">
+            <strong>+</strong> Nuovo post
+          </button>
+        </form>
       </div>
-      <form onSubmit={handleSubmit}>
-        <button type="button" onClick={deleteList}>
-          Svuota lista
-        </button>
-
-        <label htmlFor="postTitle">Titolo</label>
-        <input
-          id="postTitle"
-          type="text"
-          placeholder="..."
-          value={formData.title}
-          onChange={(event) => {
-            handlerFormData("title", event.target.value);
-          }}
-        />
-
-        <label htmlFor="postContent">Contenuto</label>
-        <input
-          id="postContent"
-          type="text"
-          placeholder="..."
-          value={formData.content}
-          onChange={(event) => {
-            handlerFormData("content", event.target.value);
-          }}
-        />
-
-        <label htmlFor="postAuthor">Autore</label>
-        <input
-          id="postAuthor"
-          type="text"
-          placeholder="..."
-          value={formData.author}
-          onChange={(event) => {
-            handlerFormData("author", event.target.value);
-          }}
-        />
-
-        <label htmlFor="postSector">Settore</label>
-        <select
-          name="postSector"
-          id="postSector"
-          onChange={(event) => {
-            handlerFormData("sector", event.target.value);
-          }}
-        >
-          <option value="frontEnd">FrontEnd</option>
-          <option value="backEnd">BackEnd</option>
-          <option value="design">UI/UX</option>
-        </select>
-
-        <label htmlFor="postVisibility">Da pubblicare</label>
-        <input
-          id="postVisibility"
-          type="checkbox"
-          value={formData.published}
-          onChange={(event) => {
-            handlerFormData("published", event.target.checked);
-          }}
-        />
-
-        <button type="submit">
-          <strong>+</strong> Nuovo post
-        </button>
-      </form>
     </div>
   );
 }
